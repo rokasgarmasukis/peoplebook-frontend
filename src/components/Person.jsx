@@ -1,7 +1,7 @@
-const Person = ({person}) => {
+const Person = () => {
 
     return (
-        <div className="personCard">
+        <div className="card">
             
         </div>
     )

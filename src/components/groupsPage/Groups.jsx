@@ -3,7 +3,7 @@ import { getGroups } from '../../api/groupsAPI';
 import { Link } from 'react-router-dom';
 
 const Groups = () => {
-    const getGroupsQuery = useQuery({
+    const groupsQuery = useQuery({
         queryKey: ['groups'],
         queryFn: getGroups,
       });

@@ -1,31 +1,5 @@
-import Groups from './components/groupsPage/Groups';
-import Home from './components/homePage/Home';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Layout from './components/layout/Layout';
-import Group from './components/groupsPage/Group';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    Component: Layout,
-    children: [
-      {
-        index: true,
-        Component: Home,
-      },
-      {
-        path: 'groups',
-        Component: Groups,
-        children: [],
-      },
 
-      {
-        path: 'groups/:id',
-        Component: Group,
-      },
-    ],
-  },
-]);
 
 function App() {
   // const getPeopleQuery = useQuery({
@@ -38,7 +12,7 @@ function App() {
 
   return (
     <div>
-      <RouterProvider router={router} />
+
     </div>
   );
 }

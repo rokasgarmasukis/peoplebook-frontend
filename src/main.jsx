@@ -4,13 +4,16 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
-import Groups from './components/groupsPage/Groups';
+import Groups, {loader as groupsLoader} from './components/groupsPage/Groups';
+// import Groups from './components/groupsPage/Groups';
 import Home from './components/homePage/Home';
 import Layout from './components/layout/Layout';
 import Group from './components/groupsPage/Group';
 
 
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { getGroups } from './api/groupsAPI';
+import Register from './components/auth/Register';
 
 const queryClient = new QueryClient();
 
@@ -21,12 +24,12 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Register />,
       },
       {
         path: 'groups',
         element: <Groups />,
-        children: [],
+        loader: async () => getGroups(),
       },
 
       {

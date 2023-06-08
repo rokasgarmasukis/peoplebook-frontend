@@ -1,25 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import axios from '../../api/axios';
-// add regex password confirmation
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{4,21}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-
-const Register = () => {
+const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
 
   const [username, setUsername] = useState('');
-  const [validUsername, setValidUsername] = useState(false);
-  const [usernameFocus, setUsernameFocus] = useState(false);
-
   const [pwd, setPwd] = useState('');
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
-
-  const [matchPwd, setMatchPwd] = useState('');
-  const [validMatch, setValidMatch] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
@@ -28,33 +15,15 @@ const Register = () => {
     userRef.current.focus();
   }, []);
 
-  useEffect(() => {
-    const result = USER_REGEX.test(username);
-    // console.log(result)
-    setValidUsername(result);
-  }, [username]);
-
-  useEffect(() => {
-    const result = PWD_REGEX.test(pwd);
-    setValidPwd(result);
-    const match = pwd === matchPwd;
-    setValidMatch(match);
-  }, [pwd, matchPwd]);
-
-  useEffect(() => {
-    setErrMsg('');
-  }, [username, pwd, matchPwd]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        'register',
+        'login',
         JSON.stringify({
           username,
           password: pwd,
-          passwordConfirmation: matchPwd,
         }),
         {
           headers: { 'Content-Type': 'application/json' },
@@ -79,12 +48,7 @@ const Register = () => {
     <div className="min-h-screen bg-base-200">
       <div className="mx-auto flex flex-col items-center">
         <div className="my-6">
-          <h1 className="text-5xl font-bold">Register</h1>
-          {/* <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p> */}
+          <h1 className="text-5xl font-bold">Login</h1>
         </div>
         <form
           onSubmit={handleSubmit}
@@ -127,21 +91,8 @@ const Register = () => {
                 onChange={(e) => setPwd(e.target.value)}
               />
             </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password confirmation</span>
-              </label>
-              <input
-                type="password"
-                placeholder="password"
-                className="input input-bordered"
-                value={matchPwd}
-                onChange={(e) => setMatchPwd(e.target.value)}
-              />
-            </div>
-
             <div className="form-control mt-2">
-              <button className="btn btn-primary">Register</button>
+              <button className="btn btn-primary">Login</button>
             </div>
           </div>
         </form>
@@ -150,4 +101,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

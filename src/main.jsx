@@ -14,6 +14,7 @@ import Group from './components/groupsPage/Group';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { getGroups } from './api/groupsAPI';
 import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
 const queryClient = new QueryClient();
 
@@ -24,7 +25,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Register />,
+        element: <Home />,
+      },
+      {
+        path: 'register',
+        element: <Register />
+      },
+      {
+        path: 'login',
+        element: <Login />
       },
       {
         path: 'groups',

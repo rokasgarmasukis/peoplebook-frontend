@@ -1,9 +1,7 @@
-import axios from 'axios';
-
-const URL = 'https://localhost:7293/api/';
+import axios from "./axios";
 
 export async function getGroups () {
-  const response = await axios.get(URL + 'groups');
+  const response = await axios.get('groups');
   return response.data;
 }
 
